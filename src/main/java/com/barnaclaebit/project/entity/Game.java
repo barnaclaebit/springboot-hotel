@@ -1,4 +1,4 @@
-package com.barnaclaebit.project.entities;
+package com.barnaclaebit.project.entity;
 
 import java.util.Objects;
 
