@@ -8,13 +8,13 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table
-public class District {
-    
+public class Continent {
+
     @Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
     private long id;
     private String name;
-    private City city;
+    private String region;
 
     @Override
     public int hashCode() {
@@ -22,7 +22,7 @@ public class District {
         int result = 1;
         result = prime * result + (int) (id ^ (id >>> 32));
         result = prime * result + ((name == null) ? 0 : name.hashCode());
-        result = prime * result + ((city == null) ? 0 : city.hashCode());
+        result = prime * result + ((region == null) ? 0 : region.hashCode());
         return result;
     }
     @Override
@@ -33,7 +33,7 @@ public class District {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        District other = (District) obj;
+        Continent other = (Continent) obj;
         if (id != other.id)
             return false;
         if (name == null) {
@@ -41,10 +41,10 @@ public class District {
                 return false;
         } else if (!name.equals(other.name))
             return false;
-        if (city == null) {
-            if (other.city != null)
+        if (region == null) {
+            if (other.region != null)
                 return false;
-        } else if (!city.equals(other.city))
+        } else if (!region.equals(other.region))
             return false;
         return true;
     }
@@ -60,12 +60,13 @@ public class District {
     public void setName(String name) {
         this.name = name;
     }
-    public City getCity() {
-        return city;
+    public String getRegion() {
+        return region;
     }
-    public void setCity(City city) {
-        this.city = city;
+    public void setRegion(String region) {
+        this.region = region;
     }
 
+    
     
 }
