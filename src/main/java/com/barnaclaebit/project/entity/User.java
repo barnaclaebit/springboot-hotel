@@ -1,13 +1,16 @@
 package com.barnaclaebit.project.entity;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table
+@Table(name="user")
 public class User {
     
     @Id
@@ -17,9 +20,10 @@ public class User {
     private String name;
     private String secondName;
     private String fullName;
-    private Contact contact;
+    @OneToMany
+    private List<Contact> contact;
     private String password;
-    
+
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -106,10 +110,10 @@ public class User {
     public void setFullName(String fullName) {
         this.fullName = fullName;
     }
-    public Contact getContact() {
+    public List<Contact> getContact() {
         return contact;
     }
-    public void setContact(Contact contact) {
+    public void setContact(List<Contact> contact) {
         this.contact = contact;
     }
     public String getPassword() {
@@ -118,6 +122,7 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+    
     
 
 }

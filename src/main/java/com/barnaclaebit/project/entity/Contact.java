@@ -1,22 +1,25 @@
 package com.barnaclaebit.project.entity;
 
 import java.util.Date;
+import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 
 @Entity
-@Table
+@Table(name="contact")
 public class Contact {
 
     @Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
     private long id;
-    private Address address;
+    @OneToMany
+    private List<Address> address;
     private String number;
     private String email;
     private Date lastUpdate;
@@ -71,10 +74,10 @@ public class Contact {
     public void setId(long id) {
         this.id = id;
     }
-    public Address getAddress() {
+    public List<Address> getAddress() {
         return address;
     }
-    public void setAddress(Address address) {
+    public void setAddress(List<Address> address) {
         this.address = address;
     }
     public String getNumber() {
@@ -95,6 +98,8 @@ public class Contact {
     public void setLastUpdate(Date lastUpdate) {
         this.lastUpdate = lastUpdate;
     }
+
+    
     
     
 }

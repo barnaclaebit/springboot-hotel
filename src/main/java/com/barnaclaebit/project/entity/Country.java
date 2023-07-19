@@ -6,18 +6,23 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table
+@Table(name="country")
 public class Country {
 
     @Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
     private long id;
     private String name;
+    @OneToOne
     private Currency currency;
+    @OneToOne
     private Language Language;
+    @OneToMany
     private List<Continent> continent;
 
     public boolean isTranscontinental(){

@@ -1,15 +1,18 @@
 package com.barnaclaebit.project.entity;
 
 import java.util.Date;
+import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table
+@Table(name="hotel")
 public class Hotel {
 
     @Id
@@ -17,9 +20,12 @@ public class Hotel {
     private long id;
     private String name;
     private String otherInformation;
+    @OneToOne
     private Address address;
     private Date since;
     private boolean isActive;
+    @OneToMany
+    private List<Reservation> reservation;
 
     @Override
     public int hashCode() {
@@ -31,6 +37,7 @@ public class Hotel {
         result = prime * result + ((address == null) ? 0 : address.hashCode());
         result = prime * result + ((since == null) ? 0 : since.hashCode());
         result = prime * result + (isActive ? 1231 : 1237);
+        result = prime * result + ((reservation == null) ? 0 : reservation.hashCode());
         return result;
     }
     @Override
@@ -65,6 +72,11 @@ public class Hotel {
         } else if (!since.equals(other.since))
             return false;
         if (isActive != other.isActive)
+            return false;
+        if (reservation == null) {
+            if (other.reservation != null)
+                return false;
+        } else if (!reservation.equals(other.reservation))
             return false;
         return true;
     }
@@ -103,6 +115,12 @@ public class Hotel {
     }
     public void setActive(boolean isActive) {
         this.isActive = isActive;
+    }
+    public List<Reservation> getReservation() {
+        return reservation;
+    }
+    public void setReservation(List<Reservation> reservation) {
+        this.reservation = reservation;
     }
 
     

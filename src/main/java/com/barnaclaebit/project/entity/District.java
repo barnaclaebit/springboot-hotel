@@ -4,16 +4,18 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table
+@Table(name="district")
 public class District {
     
     @Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
     private long id;
     private String name;
+    @OneToOne
     private City city;
 
     @Override

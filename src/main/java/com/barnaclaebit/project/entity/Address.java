@@ -4,15 +4,17 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table
+@Table(name="address")
 public class Address {
 
     @Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
     private long id;
+    @OneToOne
     private District disctrict;
     private String street;
     private int number;

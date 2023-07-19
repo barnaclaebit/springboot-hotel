@@ -10,7 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table
+@Table(name="reservation")
 public class Reservation {
     
     @Id
@@ -19,7 +19,6 @@ public class Reservation {
     private Date date;
     private BigDecimal value;
     private boolean isReserved;
-    private Hotel hotel;
 
     @Override
     public int hashCode() {
@@ -29,7 +28,6 @@ public class Reservation {
         result = prime * result + ((date == null) ? 0 : date.hashCode());
         result = prime * result + ((value == null) ? 0 : value.hashCode());
         result = prime * result + (isReserved ? 1231 : 1237);
-        result = prime * result + ((hotel == null) ? 0 : hotel.hashCode());
         return result;
     }
     @Override
@@ -54,11 +52,6 @@ public class Reservation {
         } else if (!value.equals(other.value))
             return false;
         if (isReserved != other.isReserved)
-            return false;
-        if (hotel == null) {
-            if (other.hotel != null)
-                return false;
-        } else if (!hotel.equals(other.hotel))
             return false;
         return true;
     }
@@ -86,12 +79,8 @@ public class Reservation {
     public void setReserved(boolean isReserved) {
         this.isReserved = isReserved;
     }
-    public Hotel getHotel() {
-        return hotel;
-    }
-    public void setHotel(Hotel hotel) {
-        this.hotel = hotel;
-    }
+
+    
 
     
 }
