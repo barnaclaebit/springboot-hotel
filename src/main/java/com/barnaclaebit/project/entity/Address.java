@@ -1,5 +1,6 @@
 package com.barnaclaebit.project.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -8,15 +9,19 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="address")
+@Table(name="tb_address")
 public class Address {
 
     @Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
+    @Column(name = "cl_id")
     private long id;
     @OneToOne
-    private District disctrict;
+    @Column(name = "cl_district")
+    private District district;
+    @Column(name = "cl_street")
     private String street;
+    @Column(name = "cl_number")
     private int number;
 
     @Override
@@ -24,7 +29,7 @@ public class Address {
         final int prime = 31;
         int result = 1;
         result = prime * result + (int) (id ^ (id >>> 32));
-        result = prime * result + ((disctrict == null) ? 0 : disctrict.hashCode());
+        result = prime * result + ((district == null) ? 0 : district.hashCode());
         result = prime * result + ((street == null) ? 0 : street.hashCode());
         result = prime * result + number;
         return result;
@@ -40,10 +45,10 @@ public class Address {
         Address other = (Address) obj;
         if (id != other.id)
             return false;
-        if (disctrict == null) {
-            if (other.disctrict != null)
+        if (district == null) {
+            if (other.district != null)
                 return false;
-        } else if (!disctrict.equals(other.disctrict))
+        } else if (!district.equals(other.district))
             return false;
         if (street == null) {
             if (other.street != null)
@@ -60,11 +65,11 @@ public class Address {
     public void setId(long id) {
         this.id = id;
     }
-    public District getDisctrict() {
-        return disctrict;
+    public District getdistrict() {
+        return district;
     }
-    public void setDisctrict(District disctrict) {
-        this.disctrict = disctrict;
+    public void setdistrict(District district) {
+        this.district = district;
     }
     public String getStreet() {
         return street;

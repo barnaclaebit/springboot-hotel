@@ -1,9 +1,9 @@
 
 
 --CONTINENT--
-INSERT INTO CONTINENT (
-	region
-	,name
+INSERT INTO tb_continent (
+	cl_region
+	,cl_name
 	)
 VALUES (
 	"North America"
@@ -97,14 +97,14 @@ VALUES (
 
 
 --CURRENCY--
-INSERT INTO Currency (
-	code
-	,name
-	,mojar_name
-	,cipher
-	,minor_name
-	,minor_cipher
-	,value
+INSERT INTO tb_currency (
+	cl_code
+	,cl_name
+	,cl_mojar_name
+	,cl_cipher
+	,cl_minor_name
+	,cl_minor_cipher
+	,cl_value
 	)
 VALUES (
 	"AWG"

@@ -2,6 +2,7 @@ package com.barnaclaebit.project.entity;
 
 import java.util.List;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,18 +12,23 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="country")
+@Table(name="tb_country")
 public class Country {
 
     @Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
+    @Column(name = "cl_id")
     private long id;
+    @Column(name = "cl_name")
     private String name;
     @OneToOne
+    @Column(name = "cl_currency")
     private Currency currency;
     @OneToOne
+    @Column(name = "cl_language")
     private Language Language;
     @OneToMany
+    @Column(name = "cl_continent")
     private List<Continent> continent;
 
     public boolean isTranscontinental(){

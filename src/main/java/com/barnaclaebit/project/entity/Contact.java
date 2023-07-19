@@ -3,6 +3,7 @@ package com.barnaclaebit.project.entity;
 import java.util.Date;
 import java.util.List;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,16 +13,21 @@ import jakarta.persistence.Table;
 
 
 @Entity
-@Table(name="contact")
+@Table(name="tb_contact")
 public class Contact {
 
     @Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
+    @Column(name = "cl_id")
     private long id;
     @OneToMany
+    @Column(name = "cl_address")
     private List<Address> address;
-    private String number;
+    @Column(name = "cl_phoneNumber")
+    private String phoneNumber;
+    @Column(name = "cl_email")
     private String email;
+    @Column(name = "cl_lasUpdate")
     private Date lastUpdate;
 
     @Override
@@ -30,7 +36,7 @@ public class Contact {
         int result = 1;
         result = prime * result + (int) (id ^ (id >>> 32));
         result = prime * result + ((address == null) ? 0 : address.hashCode());
-        result = prime * result + ((number == null) ? 0 : number.hashCode());
+        result = prime * result + ((phoneNumber == null) ? 0 : phoneNumber.hashCode());
         result = prime * result + ((email == null) ? 0 : email.hashCode());
         result = prime * result + ((lastUpdate == null) ? 0 : lastUpdate.hashCode());
         return result;
@@ -51,10 +57,10 @@ public class Contact {
                 return false;
         } else if (!address.equals(other.address))
             return false;
-        if (number == null) {
-            if (other.number != null)
+        if (phoneNumber == null) {
+            if (other.phoneNumber != null)
                 return false;
-        } else if (!number.equals(other.number))
+        } else if (!phoneNumber.equals(other.phoneNumber))
             return false;
         if (email == null) {
             if (other.email != null)
@@ -80,11 +86,11 @@ public class Contact {
     public void setAddress(List<Address> address) {
         this.address = address;
     }
-    public String getNumber() {
-        return number;
+    public String getphoneNumber() {
+        return phoneNumber;
     }
-    public void setNumber(String number) {
-        this.number = number;
+    public void setphoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
     public String getEmail() {
         return email;

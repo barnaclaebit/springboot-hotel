@@ -1,5 +1,6 @@
 package com.barnaclaebit.project.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -8,14 +9,17 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="state")
+@Table(name="tb_state")
 public class State {
 
     @Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
+    @Column(name = "cl_id")
     private long id;
+    @Column(name = "cl_name")
     private String name;
     @OneToOne
+    @Column(name = "cl_country")
     private Country country;
 
     @Override

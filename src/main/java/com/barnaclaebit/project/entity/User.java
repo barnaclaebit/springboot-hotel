@@ -2,6 +2,7 @@ package com.barnaclaebit.project.entity;
 
 import java.util.List;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -10,18 +11,25 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="user")
+@Table(name="tb_user")
 public class User {
     
     @Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
+    @Column(name = "cl_id")
     private long id;
+    @Column(name = "cl_user_name")
     private String username;
+    @Column(name = "cl_name")
     private String name;
+    @Column(name = "cl_second_name")
     private String secondName;
+    @Column(name = "cl_full_name")
     private String fullName;
     @OneToMany
+    @Column(name = "cl_contact")
     private List<Contact> contact;
+    @Column(name = "cl_password")
     private String password;
 
     @Override

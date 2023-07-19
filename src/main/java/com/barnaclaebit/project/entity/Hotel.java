@@ -3,6 +3,7 @@ package com.barnaclaebit.project.entity;
 import java.util.Date;
 import java.util.List;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,19 +13,26 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="hotel")
+@Table(name="tb_hotel")
 public class Hotel {
 
     @Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
+    @Column(name = "cl_id")
     private long id;
+    @Column(name = "cl_name")
     private String name;
+    @Column(name = "cl_other_information")
     private String otherInformation;
     @OneToOne
+    @Column(name = "cl_address")
     private Address address;
+    @Column(name = "cl_since")
     private Date since;
+    @Column(name = "cl_is_active")
     private boolean isActive;
     @OneToMany
+    @Column(name = "cl_reservation") 
     private List<Reservation> reservation;
 
     @Override
