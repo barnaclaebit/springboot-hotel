@@ -28,6 +28,7 @@ public class Reservation {
     private int maxOccupants;
     @Column(name = "cl_in_maintenance")
     private boolean inMaintenance;
+    @Column(name = "cl_nax_days")
     private int maxDays;
 
     public long getId() {

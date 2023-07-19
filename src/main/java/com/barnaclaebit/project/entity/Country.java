@@ -9,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
 
 @Entity
@@ -22,13 +23,13 @@ public class Country {
     @Column(name = "cl_name")
     private String name;
     @OneToOne
-    @Column(name = "cl_currency")
+    @PrimaryKeyJoinColumn()
     private Currency currency;
     @OneToOne
-    @Column(name = "cl_language")
+    @PrimaryKeyJoinColumn()
     private Language Language;
     @OneToMany
-    @Column(name = "cl_continent")
+    @PrimaryKeyJoinColumn()
     private List<Continent> continent;
 
     public boolean isTranscontinental(){

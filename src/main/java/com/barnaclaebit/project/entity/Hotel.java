@@ -10,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
 
 @Entity
@@ -25,14 +26,14 @@ public class Hotel {
     @Column(name = "cl_other_information")
     private String otherInformation;
     @OneToOne
-    @Column(name = "cl_address")
+    @PrimaryKeyJoinColumn()
     private Address address;
     @Column(name = "cl_since")
     private Date since;
     @Column(name = "cl_is_active")
     private boolean isActive;
     @OneToMany
-    @Column(name = "cl_reservation") 
+    @PrimaryKeyJoinColumn()
     private List<Reservation> reservation;
 
     @Override

@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
 
 @Entity
@@ -17,7 +18,7 @@ public class Address {
     @Column(name = "cl_id")
     private long id;
     @OneToOne
-    @Column(name = "cl_district")
+    @PrimaryKeyJoinColumn
     private District district;
     @Column(name = "cl_street")
     private String street;

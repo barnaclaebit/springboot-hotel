@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
 
 @Entity
@@ -19,7 +20,7 @@ public class District {
     @Column(name = "cl_name")
     private String name;
     @OneToOne
-    @Column(name = "cl_city")
+    @PrimaryKeyJoinColumn()
     private City city;
 
     @Override

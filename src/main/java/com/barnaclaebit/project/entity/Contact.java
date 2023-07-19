@@ -9,6 +9,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
 
 
@@ -21,7 +22,7 @@ public class Contact {
     @Column(name = "cl_id")
     private long id;
     @OneToMany
-    @Column(name = "cl_address")
+    @PrimaryKeyJoinColumn()
     private List<Address> address;
     @Column(name = "cl_phoneNumber")
     private String phoneNumber;

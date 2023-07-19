@@ -8,6 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
 
 @Entity
@@ -27,7 +28,7 @@ public class User {
     @Column(name = "cl_full_name")
     private String fullName;
     @OneToMany
-    @Column(name = "cl_contact")
+    @PrimaryKeyJoinColumn
     private List<Contact> contact;
     @Column(name = "cl_password")
     private String password;
