@@ -24,11 +24,11 @@ public class Contact {
     @OneToMany
     @PrimaryKeyJoinColumn()
     private List<Address> address;
-    @Column(name = "cl_phoneNumber")
+    @Column(name = "cl_phone_number")
     private String phoneNumber;
     @Column(name = "cl_email")
     private String email;
-    @Column(name = "cl_lasUpdate")
+    @Column(name = "cl_last_update")
     private Date lastUpdate;
 
     @Override

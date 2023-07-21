@@ -1,20 +1,19 @@
 package com.barnaclaebit.project.service;
 
-import java.util.List;
-
+import com.barnaclaebit.project.entity.Currency;
+import com.barnaclaebit.project.repository.CurrencyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.barnaclaebit.project.entity.Currency;
-import com.barnaclaebit.project.repository.CurrencyRepository;
+import java.util.List;
 
 @Service
 public class CurrencyService {
-    
-    @Autowired
-    private CurrencyRepository repository;
 
-    public List<Currency> getCurrency(){
-        return repository.findAll();
+    @Autowired
+    private CurrencyRepository currencyRepository;
+
+    public List<Currency> getAll() {
+        return currencyRepository.findAll();
     }
 }
