@@ -1,19 +1,17 @@
 package com.barnaclaebit.project.entity;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.PrimaryKeyJoinColumn;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
 @Table(name="tb_user")
-public class User {
+public class User implements UserDetails {
     
     @Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -27,111 +25,115 @@ public class User {
     private String secondName;
     @Column(name = "cl_full_name")
     private String fullName;
-    @OneToMany
+    @Column(name = "cl_role")
+    private Role role;
+    @OneToOne
     @PrimaryKeyJoinColumn
-    private List<Contact> contact;
+    private Contact contact;
     @Column(name = "cl_password")
     private String password;
 
+    public User(String username, String password, Role role){
+        this.username = username;
+        this.password = password;
+        this.role = role;
+    }
+
+    public User (){
+    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return id == user.id && Objects.equals(username, user.username) && Objects.equals(name, user.name) && Objects.equals(secondName, user.secondName) && Objects.equals(fullName, user.fullName) && Objects.equals(contact, user.contact) && Objects.equals(password, user.password);
+    }
+
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + (int) (id ^ (id >>> 32));
-        result = prime * result + ((username == null) ? 0 : username.hashCode());
-        result = prime * result + ((name == null) ? 0 : name.hashCode());
-        result = prime * result + ((secondName == null) ? 0 : secondName.hashCode());
-        result = prime * result + ((fullName == null) ? 0 : fullName.hashCode());
-        result = prime * result + ((contact == null) ? 0 : contact.hashCode());
-        result = prime * result + ((password == null) ? 0 : password.hashCode());
-        return result;
+        return Objects.hash(id, username, name, secondName, fullName, role, contact, password);
     }
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        User other = (User) obj;
-        if (id != other.id)
-            return false;
-        if (username == null) {
-            if (other.username != null)
-                return false;
-        } else if (!username.equals(other.username))
-            return false;
-        if (name == null) {
-            if (other.name != null)
-                return false;
-        } else if (!name.equals(other.name))
-            return false;
-        if (secondName == null) {
-            if (other.secondName != null)
-                return false;
-        } else if (!secondName.equals(other.secondName))
-            return false;
-        if (fullName == null) {
-            if (other.fullName != null)
-                return false;
-        } else if (!fullName.equals(other.fullName))
-            return false;
-        if (contact == null) {
-            if (other.contact != null)
-                return false;
-        } else if (!contact.equals(other.contact))
-            return false;
-        if (password == null) {
-            if (other.password != null)
-                return false;
-        } else if (!password.equals(other.password))
-            return false;
-        return true;
-    }
+
     public long getId() {
         return id;
     }
+
     public void setId(long id) {
         this.id = id;
     }
-    public String getUsername() {
-        return username;
-    }
+
     public void setUsername(String username) {
         this.username = username;
     }
+
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }
+
     public String getSecondName() {
         return secondName;
     }
+
     public void setSecondName(String secondName) {
         this.secondName = secondName;
     }
+
     public String getFullName() {
         return fullName;
     }
+
     public void setFullName(String fullName) {
         this.fullName = fullName;
     }
-    public List<Contact> getContact() {
+
+    public Contact getContact() {
         return contact;
     }
-    public void setContact(List<Contact> contact) {
+
+    public void setContact(Contact contact) {
         this.contact = contact;
     }
     public String getPassword() {
         return password;
     }
+
     public void setPassword(String password) {
         this.password = password;
     }
-    
-    
 
+    @Override //role validation if user is a normal or admin by db role column
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+
+        if(this.role == Role.ADMIN) return List.of(new SimpleGrantedAuthority( "ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
+        return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    // i'll add new features for user logins
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }
