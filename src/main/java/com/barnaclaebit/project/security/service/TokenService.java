@@ -7,6 +7,8 @@ import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.barnaclaebit.project.entity.User;
 import com.barnaclaebit.project.entity.dto.AuthDTO;
 import com.barnaclaebit.project.repository.UserRepository;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -35,6 +37,7 @@ public class TokenService  {
     public ResponseEntity<String> generateTokenBearer(@NonNull User user) {
         try {
             String token = JWT.create().withIssuer("auth-api").withSubject(user.getUsername()).withExpiresAt(generateExpirationDate()).sign(Algorithm.HMAC256(SECRET_SEED));
+
             return ResponseEntity.ok(new AuthDTO(token, "Bearer").getJson());
 
         } catch (RuntimeException ex) {
