@@ -5,28 +5,41 @@ import com.barnaclaebit.project.entity.User;
 import com.barnaclaebit.project.entity.dto.AuthDTO;
 import com.barnaclaebit.project.entity.dto.AuthenticationDTO;
 import com.barnaclaebit.project.security.service.TokenService;
+import com.barnaclaebit.project.service.AuthenticationService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")
 public class AuthenticationController {
+
     @Autowired
     private AuthenticationManager authenticationManager;
     @Autowired
     private TokenService tokenService;
 
     @PostMapping("/login")
-    public ResponseEntity login(@RequestBody @Valid AuthenticationDTO authenticationDTO) {
+    public ResponseEntity<String> login(@RequestBody @Valid AuthenticationDTO authenticationDTO) {
 
-        var usernamePassword = new UsernamePasswordAuthenticationToken(authenticationDTO.username(), authenticationDTO.password());
-        var auth = this.authenticationManager.authenticate(usernamePassword); //get the auth key to realize the login, if that is ok, the login is valid
-        var token = tokenService.generateToken((User) auth.getPrincipal());
-        return ResponseEntity.ok(new AuthDTO(token));
+       try{
+           Authentication usernamePassword = new UsernamePasswordAuthenticationToken(authenticationDTO.username(), authenticationDTO.password());
+
+           Authentication authentication = authenticationManager.authenticate(usernamePassword);
+
+           return tokenService.generateTokenBearer((User)authentication.getPrincipal());
+       }catch (RuntimeException ex){
+           return new ResponseEntity<String>("Username or password is incorrect.", HttpStatus.UNAUTHORIZED);
+       }
+
     }
+
+
 
 }
