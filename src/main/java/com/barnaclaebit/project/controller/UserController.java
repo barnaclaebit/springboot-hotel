@@ -19,7 +19,7 @@ public class UserController {
     private UserRepository userRepository;
 
     @PostMapping("/register")
-    public ResponseEntity insert(@RequestBody @Valid UserDTO userDTO) {
+    public ResponseEntity<String> register(@RequestBody @Valid UserDTO userDTO) {
         if (userRepository.findByUsername(userDTO.username()) != null) {
             return ResponseEntity.badRequest().build();
         }

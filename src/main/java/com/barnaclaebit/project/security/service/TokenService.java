@@ -7,6 +7,7 @@ import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.barnaclaebit.project.entity.User;
 import com.barnaclaebit.project.entity.dto.AuthDTO;
 import com.barnaclaebit.project.repository.UserRepository;
+import com.barnaclaebit.project.utils.Utils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.NonNull;
@@ -28,7 +29,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Service
-public class TokenService  {
+public class TokenService {
 
     @Autowired
     private UserRepository userRepository;
@@ -38,19 +39,17 @@ public class TokenService  {
         try {
             String token = JWT.create().withIssuer("auth-api").withSubject(user.getUsername()).withExpiresAt(generateExpirationDate()).sign(Algorithm.HMAC256(SECRET_SEED));
 
-            return ResponseEntity.ok(new AuthDTO(token, "Bearer").getJson());
+            return ResponseEntity.ok(Utils.getJson(new AuthDTO(token, "Bearer")));
 
         } catch (RuntimeException ex) {
             return new ResponseEntity<String>("Error on generate the token. Contact the support team.", HttpStatus.UNAUTHORIZED);
         }
     }
 
-    public String validateToken(String token) {
-        try {
-            return JWT.require(Algorithm.HMAC256(SECRET_SEED)).withIssuer("auth-api").build().verify(token).getSubject(); //send the user if he is logged or not expired
-        } catch (JWTVerificationException exception) {
-            return "";
-        }
+    public String validateToken(String token) throws JWTVerificationException {
+
+        return JWT.require(Algorithm.HMAC256(SECRET_SEED)).withIssuer("auth-api").build().verify(token).getSubject(); //send the user if he is logged or not expired
+
     }
 
     private Instant generateExpirationDate() {

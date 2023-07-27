@@ -21,27 +21,27 @@ public class SecurityConfiguration {
 
     @Autowired
     private SecurityFilter securityFilter;
+
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception{
+    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
                 .csrf(csrf -> csrf.disable()) //enable or disable the default configuration
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) //saver or not the user session
                 .authorizeHttpRequests(authorize -> //add the endpoints in app
                         authorize.requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
-                                 .requestMatchers(HttpMethod.POST, "/user/register").permitAll()
-                                 .requestMatchers(HttpMethod.POST, "/currency").hasRole("USER")
-                                 .anyRequest().authenticated()).addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class).build();
-
-
+                                .requestMatchers(HttpMethod.POST, "/user/register").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/currency").hasRole("ADMIN")
+                                .anyRequest().authenticated()
+                ).addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class).build();
     }
 
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception{
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
