@@ -47,9 +47,7 @@ public class TokenService {
     }
 
     public String validateToken(String token) throws JWTVerificationException {
-
         return JWT.require(Algorithm.HMAC256(SECRET_SEED)).withIssuer("auth-api").build().verify(token).getSubject(); //send the user if he is logged or not expired
-
     }
 
     private Instant generateExpirationDate() {
