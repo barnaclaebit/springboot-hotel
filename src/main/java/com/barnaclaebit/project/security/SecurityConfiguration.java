@@ -1,6 +1,7 @@
 package com.barnaclaebit.project.security;
 
 import com.barnaclaebit.project.entity.dto.AuthenticationDTO;
+import com.barnaclaebit.project.utils.EndPoints;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,10 +29,12 @@ public class SecurityConfiguration {
                 .csrf(csrf -> csrf.disable()) //enable or disable the default configuration
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) //saver or not the user session
                 .authorizeHttpRequests(authorize -> //add the endpoints in app
-                        authorize.requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
-                                .requestMatchers(HttpMethod.POST, "/user/register").permitAll()
-                                .requestMatchers(HttpMethod.GET, "/currency").hasRole("ADMIN")
+                        authorize.requestMatchers(HttpMethod.POST, EndPoints.PUBLIC_POST.toArray(new String[EndPoints.PUBLIC_POST.size()])).permitAll()
+                                .requestMatchers(HttpMethod.GET, EndPoints.PUBLIC_GET.toArray(new String[EndPoints.PUBLIC_GET.size()])).permitAll()
+                                .requestMatchers(HttpMethod.PUT, EndPoints.PUBLIC_PUT.toArray(new String[EndPoints.PUBLIC_PUT.size()])).permitAll()
+                                .requestMatchers(HttpMethod.DELETE, EndPoints.PUBLIC_DELETE.toArray(new String[EndPoints.PUBLIC_DELETE.size()])).permitAll()
                                 .anyRequest().authenticated()
+                        //case roles is necessary.hasRole("ADMIN")
                 ).addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class).build();
     }
 

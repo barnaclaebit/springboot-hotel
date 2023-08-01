@@ -23,6 +23,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 @Component
 public class SecurityFilter extends OncePerRequestFilter {
@@ -46,7 +47,7 @@ public class SecurityFilter extends OncePerRequestFilter {
 
             }
             //if the request is not directed to login, authentication is mandatory
-           else if(!EndPoints.publicEndpoint.contains(request.getRequestURI())){
+           else if(!EndPoints.PUBLIC_POST.contains(request.getRequestURI())){
                 response.setStatus(HttpStatus.UNAUTHORIZED.value());
                 response.setContentType("application/json");
                 response.getWriter().write(Utils.getJson(new ReturnResponse(HttpStatus.FORBIDDEN, "Authentication is necessary.")));

@@ -11,9 +11,15 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name="tb_country")
+@Getter
+@Setter
+@EqualsAndHashCode
 public class Country {
 
     @Id
@@ -33,89 +39,9 @@ public class Country {
     private List<Continent> continent;
 
     public boolean isTranscontinental(){
-        return continent != null ? continent.size() > 0 : false;
+        return continent != null && continent.size() > 0;
     }
 
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + (int) (id ^ (id >>> 32));
-        result = prime * result + ((name == null) ? 0 : name.hashCode());
-        result = prime * result + ((currency == null) ? 0 : currency.hashCode());
-        result = prime * result + ((Language == null) ? 0 : Language.hashCode());
-        result = prime * result + ((continent == null) ? 0 : continent.hashCode());
-        return result;
-    }
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Country other = (Country) obj;
-        if (id != other.id)
-            return false;
-        if (name == null) {
-            if (other.name != null)
-                return false;
-        } else if (!name.equals(other.name))
-            return false;
-        if (currency == null) {
-            if (other.currency != null)
-                return false;
-        } else if (!currency.equals(other.currency))
-            return false;
-        if (Language == null) {
-            if (other.Language != null)
-                return false;
-        } else if (!Language.equals(other.Language))
-            return false;
-        if (continent == null) {
-            if (other.continent != null)
-                return false;
-        } else if (!continent.equals(other.continent))
-            return false;
-        return true;
-    }
-    public long getId() {
-        return id;
-    }
-    public void setId(long id) {
-        this.id = id;
-    }
-    public String getName() {
-        return name;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
-    public Currency getCurrency() {
-        return currency;
-    }
-    public void setCurrency(Currency currency) {
-        this.currency = currency;
-    }
-    public Language getLanguage() {
-        return Language;
-    }
-    public void setLanguage(Language language) {
-        Language = language;
-    }
-    public List<Continent> getContinent() {
-        return continent;
-    }
-    public void setContinent(List<Continent> continent) {
-        this.continent = continent;
-    }
 
-    
-
-    
-
-
-    
     
 }

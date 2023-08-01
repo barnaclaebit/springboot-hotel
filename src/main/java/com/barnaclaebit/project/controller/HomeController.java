@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/home")
 public class HomeController {
 
 
@@ -24,19 +24,9 @@ public class HomeController {
     @Autowired
     private CurrencyService currencyService;
 
-    @GetMapping
-    public String getHomePageInfos() {
+    @GetMapping("/info")
+    public String getHomePageInfo() {
         return "algumas infos";
-    }
-
-    @GetMapping("/currency")
-    public List<Currency> getCurrency() {
-        return currencyService.getAll();
-    }
-
-    @GetMapping("/continent")
-    public List<Continent> getContinents() {
-        return continentService.getAll();
     }
 
 
