@@ -3,12 +3,7 @@ package com.barnaclaebit.project.entity;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -34,9 +29,10 @@ public class Reserve {
     private int maxOccupants;
     @Column(name = "cl_in_maintenance")
     private boolean inMaintenance;
-    @Column(name = "cl_nax_days")
+    @Column(name = "cl_max_days")
     private int maxDays;
-
-
+    @OneToOne
+    @PrimaryKeyJoinColumn()
+    private City city;
 
 }

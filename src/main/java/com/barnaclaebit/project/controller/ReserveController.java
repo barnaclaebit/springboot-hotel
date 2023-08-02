@@ -1,20 +1,24 @@
 package com.barnaclaebit.project.controller;
 
-import com.barnaclaebit.project.entity.vo.CityVO;
-import com.barnaclaebit.project.entity.vo.ContinentVO;
-import com.barnaclaebit.project.entity.vo.CountryVO;
-import com.barnaclaebit.project.entity.vo.RegionVO;
+import com.barnaclaebit.project.entity.Reserve;
+import com.barnaclaebit.project.entity.vo.*;
+import com.barnaclaebit.project.service.ReserveService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/reserve")
 public class ReserveController {
 
+    @Autowired
+    private ReserveService reserveService;
 
-    @GetMapping("/region")
-    public void getReserveByRegion(RegionVO regionVO){
+    @GetMapping("/state")
+    public void getReserveByState(StateVO stateVO){
 
     }
 
@@ -29,8 +33,8 @@ public class ReserveController {
     }
 
     @GetMapping("/continent")
-    public void getReserveByContinent(ContinentVO continentVO){
-
+    public List<Reserve> getReserveByContinent(ContinentVO continentVO){
+        return reserveService.getReserveByContinent(continentVO);
     }
 
 }

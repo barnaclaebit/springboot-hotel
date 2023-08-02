@@ -1,7 +1,9 @@
 package com.barnaclaebit.project.service;
 
+import com.barnaclaebit.project.entity.Continent;
 import com.barnaclaebit.project.entity.Reserve;
-import com.barnaclaebit.project.repository.ReservationRepository;
+import com.barnaclaebit.project.repository.ReserveRepository;
+import com.barnaclaebit.project.repository.ReserveRespositoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,25 +13,21 @@ import java.util.List;
 public class ReserveService {
 
     @Autowired
-    private ReservationRepository reservationRepository;
+    private ReserveRespositoryImpl reserveRespository;
 
-    public List<Reserve> getReserveByCity(){
+    public List<Reserve> getReserveByCity() {
         return null;
     }
 
-    public List<Reserve> getReserveByContinent(){
+    public List<Reserve> getReserveByContinent(Continent continent) {
+        return reserveRespository.getReserveByContinent(continent);
+    }
+
+    public List<Reserve> getReserveByCountry() {
         return null;
     }
 
-    public List<Reserve> getReserveByCountry(){
-        return null;
-    }
-
-    public List<Reserve> getReserveByRegion(){
-        return null;
-    }
-
-    public List<Reserve> getReserveByState(){
+    public List<Reserve> getReserveByState() {
         return null;
     }
 }
