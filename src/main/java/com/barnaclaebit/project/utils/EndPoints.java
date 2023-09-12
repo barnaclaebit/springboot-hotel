@@ -11,7 +11,8 @@ public class EndPoints {
              HOME_INFO_GET
     );
     public static final List<String> PUBLIC_POST = List.of(
-            AUTH_LOGIN_POST
+            AUTH_LOGIN_POST,
+            USER_REGISTER_POST
     );
     public static final List<String> PUBLIC_PUT = List.of(
 
@@ -28,7 +29,7 @@ public class EndPoints {
     );
 
     public static final List<String> PRIVATE_POST = List.of(
-             USER_REGISTER_POST
+
     );
 
     public static final List<String> PRIVATE_PUT = List.of(

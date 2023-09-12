@@ -62,6 +62,7 @@ public class SecurityFilter extends OncePerRequestFilter {
             response.setStatus(HttpStatus.FORBIDDEN.value());
             response.setContentType("application/json");
             response.getWriter().write(Utils.getJson(new ReturnResponse(HttpStatus.FORBIDDEN, "Invalid Token: " + e.getMessage())));
+
         } catch (SignatureVerificationException e) {
             // return error for invalid token
             response.setStatus(HttpStatus.UNAUTHORIZED.value());
@@ -73,10 +74,13 @@ public class SecurityFilter extends OncePerRequestFilter {
             response.setStatus(HttpStatus.UNAUTHORIZED.value());
             response.setContentType("application/json");
             response.getWriter().write(Utils.getJson(new ReturnResponse(HttpStatus.FORBIDDEN, e.getMessage())));
+
         }catch (TokenExpiredException e){
+            //return error for expired token
             response.setStatus(HttpStatus.UNAUTHORIZED.value());
             response.setContentType("application/json");
             response.getWriter().write(Utils.getJson(new ReturnResponse(HttpStatus.FORBIDDEN, e.getMessage())));
+
         }
 
     }

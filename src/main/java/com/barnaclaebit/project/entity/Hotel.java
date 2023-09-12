@@ -3,6 +3,7 @@ package com.barnaclaebit.project.entity;
 import java.util.Date;
 import java.util.List;
 
+import com.barnaclaebit.project.entity.dto.HotelDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -44,7 +45,9 @@ public class Hotel {
 
 
 
-    
+    public HotelDTO modelToDTO(){
+        return new HotelDTO(name, otherInformation, address, since, isActive, reservation);
+    }
 
     
 }
