@@ -37,6 +37,10 @@ public class HotelService {
             throw new HotelNotFoundException();
         }
 
+        Hotel hotelResponse = hotelRepository.getReferenceById(hotel.getId());
+        if(hotelResponse == null){
+            throw new HotelNotFoundException();
+        }
         return hotelRepository.getReferenceById(hotel.getId());
     }
 

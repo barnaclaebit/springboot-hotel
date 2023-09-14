@@ -45,20 +45,23 @@ public class HotelController {
         try {
             hotelService.delete(hotelVO);
         } catch (Exception ex) {
+
             response.setStatus(HttpStatus.BAD_REQUEST.value());
             response.setContentType("application/json");
             response.getWriter().write(Utils.getJson(new ReturnResponse(HttpStatus.BAD_REQUEST, "Error: " + ex.getMessage())));
         }
     }
 
+    @GetMapping()
     public HotelDTO get(@NonNull HttpServletRequest request, @NonNull HttpServletResponse
             response, @RequestBody @Valid HotelVO hotelVO) throws IOException {
         try {
             return hotelService.get(hotelVO).modelToDTO();
         } catch (Exception ex) {
-            response.setStatus(HttpStatus.BAD_REQUEST.value());
+
+            response.setStatus(HttpStatus.NOT_FOUND.value());
             response.setContentType("application/json");
-            response.getWriter().write(Utils.getJson(new ReturnResponse(HttpStatus.BAD_REQUEST, "Error: " + ex.getMessage())));
+            response.getWriter().write(Utils.getJson(new ReturnResponse(HttpStatus.NOT_FOUND, "Error: " + ex.getMessage())));
             return null;
         }
     }
