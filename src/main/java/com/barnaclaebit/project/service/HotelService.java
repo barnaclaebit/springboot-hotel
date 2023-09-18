@@ -3,6 +3,7 @@ package com.barnaclaebit.project.service;
 import com.barnaclaebit.project.entity.Hotel;
 import com.barnaclaebit.project.entity.exception.HotelNotFoundException;
 import com.barnaclaebit.project.repository.HotelRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,26 +26,21 @@ public class HotelService {
 
     }
 
-    public void delete(Hotel hotel) throws HotelNotFoundException{
-        if(hotel == null){
+    public void delete(Hotel hotel) throws HotelNotFoundException {
+        if (hotel == null) {
             throw new HotelNotFoundException();
         }
-         hotelRepository.delete(hotel);
+        hotelRepository.delete(hotel);
     }
 
-    public Hotel get(Hotel hotel){
-        if(hotel == null){
-            throw new HotelNotFoundException();
+    public Hotel get(Hotel hotel) throws EntityNotFoundException, IllegalArgumentException{
+        if (hotel == null) {
+            throw new IllegalArgumentException("Null parameter is not permitted.");
         }
-
-        Hotel hotelResponse = hotelRepository.getReferenceById(hotel.getId());
-        if(hotelResponse == null){
-            throw new HotelNotFoundException();
-        }
-        return hotelRepository.getReferenceById(hotel.getId());
+            return hotelRepository.getReferenceById(hotel.getId());
     }
 
-    public List<Hotel> getAll(){
+    public List<Hotel> getAll() {
         return hotelRepository.findAll();
     }
 }
