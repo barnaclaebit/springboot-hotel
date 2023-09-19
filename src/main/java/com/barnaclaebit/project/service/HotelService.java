@@ -35,9 +35,17 @@ public class HotelService {
 
     public Hotel get(Hotel hotel) throws EntityNotFoundException, IllegalArgumentException{
         if (hotel == null) {
-            throw new IllegalArgumentException("Null parameter is not permitted.");
+            throw new IllegalArgumentException("Empty parameter is not permitted.");
         }
             return hotelRepository.getReferenceById(hotel.getId());
+    }
+
+    public List<Hotel> getByFilter() throws EntityNotFoundException, IllegalArgumentException{
+//        if (hotel == null) {
+//            throw new IllegalArgumentException("Empty parameter is not permitted.");
+//        }
+//        return hotelRepository.getByFilter(hotel.getAddress().getDistrict().getCity().getState().getCountry().getId());
+        return null;
     }
 
     public List<Hotel> getAll() {
