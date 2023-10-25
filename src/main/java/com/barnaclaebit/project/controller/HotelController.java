@@ -27,7 +27,6 @@ public class HotelController {
     @Autowired
     private HotelService hotelService;
 
-
     @PostMapping()
     public HotelDTO save(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @RequestBody @Valid HotelVO hotelVO) throws IOException {
 
@@ -80,9 +79,9 @@ public class HotelController {
         }
     }
 
-    @GetMapping()
-    public ResponseEntity<?> getList(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @RequestBody HotelVO hotelVO) throws IOException{
-       return null;
-    }
+//    @GetMapping()
+//    public ResponseEntity<?> getList(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @RequestBody HotelVO hotelVO) throws IOException{
+//       return null;
+//    }
 
 }
