@@ -10,6 +10,6 @@ import java.util.List;
 public interface HotelRepository extends JpaRepository<Hotel, Long> {
 
 
-    @Query("SELECT Hotel FROM Hotel WHERE Hotel.Address.District.City.State.Id = :IdState")
-    public List<Hotel> getByFilter(@Param("IdState") Long IdState);
+//    @Query("SELECT Hotel FROM Hotel WHERE Hotel.Address.District.City.State.Id = :IdState")
+//    public List<Hotel> getByFilter(@Param("IdState") Long IdState);
 }
