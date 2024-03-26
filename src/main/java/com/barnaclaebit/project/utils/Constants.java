@@ -8,13 +8,14 @@ public class Constants {
     public static final String USER_ROOT = "/user";
 
 
-    public static final String AUTH_LOGIN_POST = "/auth/login";
+    public static final String AUTH_LOGIN_POST = "/auth";
 
 
     public static final String HOME_INFO_GET = "/home/info";
 
 
-    public static final String USER_REGISTER_POST = "/user/register";
+    public static final String USER_REGISTER_POST = "/user";
+    public static final String USER_GET = "/user";
 
 
     public static final String RESERVE_CITY_GET = "/reserve/city";

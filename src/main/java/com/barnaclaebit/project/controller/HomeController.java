@@ -15,9 +15,6 @@ import java.util.List;
 @RequestMapping("/home")
 public class HomeController {
 
-
-
-
     //test endpoints
     @Autowired
     private ContinentService continentService;

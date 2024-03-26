@@ -1,6 +1,5 @@
 package com.barnaclaebit.project.utils;
 
-import java.lang.reflect.Array;
 import java.util.List;
 
 import static com.barnaclaebit.project.utils.Constants.*;
@@ -26,6 +25,7 @@ public class EndPoints {
             , RESERVE_CITY_GET
             , RESERVE_COUNTRY_GET
             , RESERVE_STATE_GET
+            , USER_GET
     );
 
     public static final List<String> PRIVATE_POST = List.of(

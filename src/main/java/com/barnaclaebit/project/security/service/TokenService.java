@@ -31,8 +31,7 @@ import java.util.Map;
 @Service
 public class TokenService {
 
-    @Autowired
-    private UserRepository userRepository;
+
     private static final String SECRET_SEED = "barnaclaebit"; //"seed" to generate a hash token
 
     public ResponseEntity<String> generateTokenBearer(@NonNull User user) {
