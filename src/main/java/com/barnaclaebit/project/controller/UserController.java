@@ -4,7 +4,12 @@ import com.barnaclaebit.project.entity.User;
 import com.barnaclaebit.project.entity.dto.AuthenticationDTO;
 import com.barnaclaebit.project.entity.dto.UserDTO;
 import com.barnaclaebit.project.repository.UserRepository;
+import com.barnaclaebit.project.service.UserService;
+
 import jakarta.validation.Valid;
+
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -15,20 +20,32 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/user")
 public class UserController {
-    @Autowired
-    private UserRepository userRepository;
 
-    @PostMapping("/register")
-    public ResponseEntity<String> register(@RequestBody @Valid UserDTO userDTO) {
-        if (userRepository.findByUsername(userDTO.username()) != null) {
-            return ResponseEntity.badRequest().build();
-        }
+	@Autowired
+	private UserService userService;
 
-        String encryptedPassword = new BCryptPasswordEncoder().encode(userDTO.password());
-        User user = new User(userDTO.username(), encryptedPassword, userDTO.role());
-        userRepository.save(user);
-        return ResponseEntity.ok().build();
-    }
+	@PostMapping()
+	public ResponseEntity<?> save(@RequestBody @Valid UserDTO userDTO) {
+		try {
 
+			return ResponseEntity.ok(userService.save(userDTO.dtoToEntity()));
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			ResponseEntity.internalServerError();
+			return null;
+		}
+	}
+
+	@GetMapping()
+	public ResponseEntity<?> get(@RequestBody @Valid UserDTO userDTO) {
+
+		Optional<User> user = userService.findById(userDTO.id());
+
+		if (user == null)
+			ResponseEntity.notFound();
+
+		return ResponseEntity.ok(user);
+
+	}
 
 }

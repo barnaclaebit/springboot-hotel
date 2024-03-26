@@ -19,7 +19,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 @EqualsAndHashCode
 public class User implements UserDetails {
     
-    @Id
+	private static final long serialVersionUID = 6621550917365958759L;
+	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name = "cl_id")
     private long id;
@@ -44,6 +45,13 @@ public class User implements UserDetails {
         this.password = password;
         this.role = role;
     }
+    
+    public User(Long id, String username, String password, Role role) {
+    	this.id = id;
+    	this.username = username;
+        this.password = password;
+        this.role = role;
+    }
 
     public User (){
     }
@@ -55,6 +63,7 @@ public class User implements UserDetails {
         return List.of(new SimpleGrantedAuthority("ROLE_USER"));
     }
     // i'll add new features for user logins
+    
     @Override
     public boolean isAccountNonExpired() {
         return true;
