@@ -25,7 +25,7 @@ public class UserService {
 
 		if (user.getId() == 0)
 			user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
-		
+
 		return userRepository.save(user);
 
 	}
@@ -38,6 +38,15 @@ public class UserService {
 			return user;
 
 		throw new UserNotFoundException();
+	}
+
+	public void delete(Long id) throws UserNotFoundException {
+
+		if (userRepository.findById(id).isEmpty())
+			throw new UserNotFoundException();
+
+		userRepository.deleteById(id);
+
 	}
 
 }

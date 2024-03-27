@@ -8,6 +8,9 @@ import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,6 +20,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Getter
 @Setter
 @EqualsAndHashCode
+@DynamicInsert
+@DynamicUpdate
 public class User implements UserDetails {
     
 	private static final long serialVersionUID = 6621550917365958759L;

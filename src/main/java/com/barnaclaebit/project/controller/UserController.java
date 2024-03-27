@@ -40,5 +40,19 @@ public class UserController {
 		}
 
 	}
+	
+	
+	@DeleteMapping("/{id}")
+	public ResponseEntity<?> delete(@PathVariable Long id) {
+
+		try {
+			userService.delete(id);
+			return ResponseEntity.ok().build();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return ResponseEntity.notFound().build();
+		}
+
+	}
 
 }
