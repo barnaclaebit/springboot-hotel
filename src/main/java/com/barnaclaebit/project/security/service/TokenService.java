@@ -34,16 +34,18 @@ public class TokenService {
 
     private static final String SECRET_SEED = "barnaclaebit"; //"seed" to generate a hash token
 
-    public ResponseEntity<String> generateTokenBearer(@NonNull User user) {
-        try {
-            String token = JWT.create().withIssuer("auth-api").withSubject(user.getUsername()).withExpiresAt(generateExpirationDate()).sign(Algorithm.HMAC256(SECRET_SEED));
+	public AuthDTO generateTokenBearer(@NonNull User user) {
+		try {
+			String token = JWT.create().withIssuer("auth-api").withSubject(user.getUsername())
+					.withExpiresAt(generateExpirationDate()).sign(Algorithm.HMAC256(SECRET_SEED));
 
-            return ResponseEntity.ok(Utils.getJson(new AuthDTO(token, "Bearer")));
+			return new AuthDTO(token, "Bearer");
 
-        } catch (RuntimeException ex) {
-            return new ResponseEntity<String>("Error on generate the token. Contact the support team.", HttpStatus.UNAUTHORIZED);
-        }
-    }
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 
     public String validateToken(String token) throws JWTVerificationException {
         return JWT.require(Algorithm.HMAC256(SECRET_SEED)).withIssuer("auth-api").build().verify(token).getSubject(); //send the user if he is logged or not expired

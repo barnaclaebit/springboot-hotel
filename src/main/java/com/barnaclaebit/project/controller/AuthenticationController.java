@@ -26,14 +26,14 @@ public class AuthenticationController {
     private TokenService tokenService;
 
     @PostMapping()
-    public ResponseEntity<String> login(@RequestBody @Valid AuthenticationDTO authenticationDTO) {
+    public ResponseEntity<?> login(@RequestBody @Valid AuthenticationDTO authenticationDTO) {
 
        try{
            Authentication usernamePassword = new UsernamePasswordAuthenticationToken(authenticationDTO.username(), authenticationDTO.password());
 
            Authentication authentication = authenticationManager.authenticate(usernamePassword);
 
-           return tokenService.generateTokenBearer((User)authentication.getPrincipal());
+           return ResponseEntity.ok(tokenService.generateTokenBearer((User)authentication.getPrincipal()));
        }catch (RuntimeException ex){
            return new ResponseEntity<String>("Username or password is incorrect.", HttpStatus.UNAUTHORIZED);
        }

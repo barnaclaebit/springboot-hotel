@@ -20,11 +20,12 @@ public class UserService {
 
 	public User save(User user) throws UserFoundException, IllegalArgumentException, OptimisticLockingFailureException {
 
-		if (userRepository.findByUsername(user.getUsername()) != null)
+		if ((userRepository.findByUsername(user.getUsername()) != null) && (user.getId() == 0))
 			throw new UserFoundException();
 
-		user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
-
+		if (user.getId() == 0)
+			user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+		
 		return userRepository.save(user);
 
 	}
@@ -33,7 +34,7 @@ public class UserService {
 
 		Optional<User> user = userRepository.findById(id);
 
-		if (user != null)
+		if (!user.isEmpty())
 			return user;
 
 		throw new UserNotFoundException();
