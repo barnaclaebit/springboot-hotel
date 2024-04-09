@@ -39,6 +39,16 @@ public class UserService {
 
 		throw new UserNotFoundException();
 	}
+	
+	public Optional<User> findByUserName(String username) throws UserNotFoundException{
+		
+		Optional<User> user = Optional.of(userRepository.findByUsername(username));
+
+		if (!user.isEmpty())
+			return user;
+
+		throw new UserNotFoundException();
+	}
 
 	public void delete(Long id) throws UserNotFoundException {
 

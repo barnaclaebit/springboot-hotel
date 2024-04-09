@@ -33,7 +33,7 @@ public class UserController {
 
 		try {
 
-			return ResponseEntity.ok(userService.findById(userDTO.id()));
+			return ResponseEntity.ok(userService.findByUserName(userDTO.username()));
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			return ResponseEntity.notFound().build();
