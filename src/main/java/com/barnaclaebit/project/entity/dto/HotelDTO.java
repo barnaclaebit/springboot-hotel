@@ -6,5 +6,5 @@ import com.barnaclaebit.project.entity.Reserve;
 import java.util.Date;
 import java.util.List;
 
-public record HotelDTO(String name, String otherInformation, Address address, Date since, boolean isActive, List<Reserve> reservation) {
+public record HotelDTO(Long id,String name, String otherInformation, Address address, Date since, Boolean isActive, List<Reserve> reservation) {
 }
