@@ -26,6 +26,7 @@ public class EndPoints {
             , RESERVE_COUNTRY_GET
             , RESERVE_STATE_GET
             , USER_GET
+            , HOTEL_ALL_GET
     );
 
     public static final List<String> PRIVATE_POST = List.of(

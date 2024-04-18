@@ -1,6 +1,5 @@
 package com.barnaclaebit.project.security;
 
-import com.barnaclaebit.project.entity.dto.AuthenticationDTO;
 import com.barnaclaebit.project.utils.EndPoints;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
